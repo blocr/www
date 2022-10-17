@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Blocr$if(title)$: $title$$endif$</title>
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  </head>
+  <body>
+      <header>
+          <a href="/index.html">B_</a>
+          <nav>
+              <a href="/about.html"><img src="/assets/img/info.svg" alt='about'></a>
+              <a href='https://github.com/blocr'><img
+                  src="/assets/img/github.svg" alt="github"></a>
+          </nav>
+      </header>
+      <main>
+          $if(title)$
+          <article>
+              <h1>$title$</h1>
+              $if(date)$<date>$date$</date>$endif$
+              $body$
+          </article>
+          $else$
+          $body$
+          $endif$
+      </main>
+      <hr />
+      <footer>
+          <span>whisper </span>
+          <a href="/assets/keys/key.pub">0x71051C9EBF15C78B08B6C84A1469ACCA87429B13</a>
+      </footer>
+  </body>
+</html>
