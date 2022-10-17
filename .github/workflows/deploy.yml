@@ -12,6 +12,5 @@ jobs:
           with:
             context: .
             file: ./Dockerfile
-            tags: blocr:latest
         - uses: superfly/flyctl-actions/setup-flyctl@master
-        - run: flyctl deploy --remote-only --image blocr:latest
+        - run: flyctl deploy --remote-only
