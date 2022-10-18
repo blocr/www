@@ -16,7 +16,7 @@ $(BUILDDIR)/index.html: index.md $(TEMPLATE)
 	$(MD) $(MDFLAGS) $< -T $(TEMPLATES)/page.html -F $(FILTER) > $@
 
 $(BUILDDIR)/%.html: %.md $(TEMPLATE)
-	$(MD) $(MDFLAGS) $< -T $(TEMPLATES)/post.html > $@
+	$(MD) $(MDFLAGS) $< -T $(TEMPLATES)/page.html > $@
 
 $(BUILDDIR)/posts/%.html: posts/%.md $(TEMPLATE)
 	$(MD) $(MDFLAGS) $< -T $(TEMPLATES)/post.html > $@
