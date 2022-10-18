@@ -34,4 +34,4 @@ ipfs config Addresses.API --json '["/ip4/0.0.0.0/tcp/5001", "/ip6/::/tcp/5001"]'
 # ipfs config --json Addresses.AppendAnnounce '["/ip4/[ADD_IP_V4_HERE]/tcp/4001"]'
 
 # deploy the static directory
-ipfs add -r public
+ipfs add -rq public | tail -n 1 | ipfs name publish --allow-offline
