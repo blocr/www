@@ -1,25 +1,25 @@
-MD       := lcmark
-CP       := rsync
-MDFLAGS  := -u
-CPFLAGS  := -avzq
-BUILDDIR := public
-TEMPLATE := template.html
-FILTER   := filter.lua
+MD        := lcmark
+CP        := rsync
+MDFLAGS   := -u
+CPFLAGS   := -avzq
+BUILDDIR  := public
+TEMPLATES := templates
+FILTER    := filter.lua
 
-PAGES    := $(patsubst %.md, $(BUILDDIR)/%.html, $(wildcard *.md))
-POSTS    := $(patsubst posts/%.md, $(BUILDDIR)/posts/%.html, $(wildcard posts/*.md))
-ASSETS   := $(patsubst assets/%, $(BUILDDIR)/assets/%, $(wildcard assets/**/*))
+PAGES     := $(patsubst %.md, $(BUILDDIR)/%.html, $(wildcard *.md))
+POSTS     := $(patsubst posts/%.md, $(BUILDDIR)/posts/%.html, $(wildcard posts/*.md))
+ASSETS    := $(patsubst assets/%, $(BUILDDIR)/assets/%, $(wildcard assets/**/*))
 
 all: $(BUILDDIR) $(ASSETS) $(POSTS) $(PAGES)
 
 $(BUILDDIR)/index.html: index.md $(TEMPLATE)
-	$(MD) $(MDFLAGS) $< -T $(TEMPLATE) -F $(FILTER) > $@
+	$(MD) $(MDFLAGS) $< -T $(TEMPLATES)/page.html -F $(FILTER) > $@
 
 $(BUILDDIR)/%.html: %.md $(TEMPLATE)
-	$(MD) $(MDFLAGS) $< -T $(TEMPLATE) > $@
+	$(MD) $(MDFLAGS) $< -T $(TEMPLATES)/post.html > $@
 
 $(BUILDDIR)/posts/%.html: posts/%.md $(TEMPLATE)
-	$(MD) $(MDFLAGS) $< -T $(TEMPLATE) > $@
+	$(MD) $(MDFLAGS) $< -T $(TEMPLATES)/post.html > $@
 	@touch -m index.md
 
 $(BUILDDIR)/assets/%: assets/%
