@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Thought-Provoking Rambles</title>
+  <link href="" rel="self"/>
+  <updated>$time$</updated>
+  <author>
+    <name>TPR</name>
+  </author>
+  <id></id>
+  $for(posts)$
+      <entry>
+        <title>$it.title$</title>
+        <link href="$it.path$"/>
+        <id>$it.path$</id>
+        <updated>$it.date$</updated>
+        <summary>$it.abstract$</summary>
+      </entry>
+  $endfor$
+</feed>

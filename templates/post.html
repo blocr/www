@@ -4,34 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Blocr$if(title)$: $title$$endif$</title>
+    <title>TPR: $if(title)$$title$$endif$</title>
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="icon" href="favicon.ico" type="image/x-icon">
   </head>
   <body>
-      <header>
-          <a href="../index.html">B_</a>
+      <aside>
+          <header>
+              <a href="../index.html">Thought-Provoking Rambles</a>
+          </header>
           <nav>
-              <a href="../about.html"><img src="../assets/img/info.svg" alt='about'></a>
-              <a href='https://github.com/blocr'><img
-                  src="../assets/img/github.svg" alt="github"></a>
+              <ul>
+                  <li><a href="../index.html">Thoughts</a></li>
+                  <li><a href="/">Projects</a></li>
+                  <li><a href="/">About</a></li>
+              </ul>
           </nav>
-      </header>
+      </aside>
       <main>
-          $if(title)$
           <article>
-              <h1>$title$</h1>
-              $if(date)$<date>$date$</date>$endif$
+              <header>
+                  <span>Published <time>$date$</time></span>
+                  $if(updated)$
+                  <span>Updated <time>$updated$</time></span>
+                  $endif$
+                  <h1>$title$</h1>
+              </header>
               $body$
           </article>
-          $else$
-          $body$
-          $endif$
+          <footer>
+              <span>Built: <time>$time$</time></span>
+              <span>
+                  <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+              </span>
+          </footer>
       </main>
-      <hr />
-      <footer>
-          <span>whisper </span>
-          <a href="../assets/keys/key.pub">0x71051C9EBF15C78B08B6C84A1469ACCA87429B13</a>
-      </footer>
   </body>
 </html>
