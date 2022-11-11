@@ -1,6 +1,6 @@
-# fly.toml file generated for blocr on 2022-10-18T00:29:36+01:00
+# fly.toml file generated for tpr on 2022-11-11T20:51:01+01:00
 
-app = "blocr"
+app = "tpr"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
