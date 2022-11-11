@@ -1,29 +1,33 @@
-MD        := lcmark
-CP        := rsync
-MDFLAGS   := -u
-CPFLAGS   := -avzq
-BUILDDIR  := public
-TEMPLATES := templates
-FILTER    := filter.lua
+MD         := pandoc
+CP         := rsync
+CPFLAGS    := -avzq
+BUILDDIR   := public
+TEMPLATES  := templates
+FILTERS    := filters
 
-PAGES     := $(patsubst %.md, $(BUILDDIR)/%.html, $(wildcard *.md))
-POSTS     := $(patsubst posts/%.md, $(BUILDDIR)/posts/%.html, $(wildcard posts/*.md))
-ASSETS    := $(patsubst assets/%, $(BUILDDIR)/assets/%, $(wildcard assets/**/*))
+PAGES      := $(patsubst %.md, $(BUILDDIR)/%.html, $(wildcard *.md))
+POSTS      := $(patsubst posts/%.md, $(BUILDDIR)/posts/%.html, $(wildcard posts/*.md))
+ASSETS     := $(patsubst assets/%, $(BUILDDIR)/assets/%, $(wildcard assets/**/*))
+FEED       := $(BUILDDIR)/feed.xml
 
-all: $(BUILDDIR) $(ASSETS) $(POSTS) $(PAGES)
+TIME       := $(shell date -u '+%b %d, %Y %H:%M:%S %Z')
 
-$(BUILDDIR)/index.html: index.md $(TEMPLATE)
-	$(MD) $(MDFLAGS) $< -T $(TEMPLATES)/page.html -F $(FILTER) > $@
+all: $(BUILDDIR) $(ASSETS) $(POSTS) $(PAGES) $(FEED)
 
-$(BUILDDIR)/%.html: %.md $(TEMPLATE)
-	$(MD) $(MDFLAGS) $< -T $(TEMPLATES)/page.html > $@
+$(BUILDDIR)/index.html: index.md $(TEMPLATES)/page.html index.yml
+	$(MD) $< --template $(TEMPLATES)/page -V time:'$(TIME)' --metadata-file index.yml -o $@
 
-$(BUILDDIR)/posts/%.html: posts/%.md $(TEMPLATE)
-	$(MD) $(MDFLAGS) $< -T $(TEMPLATES)/post.html > $@
-	@touch -m index.md
+$(BUILDDIR)/%.html: %.md $(TEMPLATES)/page.html
+	$(MD) $< --template $(TEMPLATES)/page -V time='$(TIME)' -o $@
+
+$(BUILDDIR)/posts/%.html: posts/%.md $(TEMPLATES)/post.html
+	$(MD) $< --template $(TEMPLATES)/post -V time='$(TIME)' -o $@
 
 $(BUILDDIR)/assets/%: assets/%
-	$(CP) $(CPFLAGS) $< $@
+	$(CP) $< $@
+
+$(FEED): index.yml $(TEMPLATES)/feed.xml
+	$(MD) index.yml --template $(TEMPLATES)/feed.xml -V time:'$(shell date -u +'%FT%TZ')' -L $(FILTERS)/rfc3339.lua -o $@
 
 $(BUILDDIR):
 	mkdir -p $(BUILDDIR)/posts
