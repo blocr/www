@@ -7,8 +7,10 @@ COPY . /app
 
 RUN make
 
-FROM nginx
-COPY ./nginx.conf /etc/nginx/nginx.conf
-COPY --from=build /app/public /usr/share/nginx/html
+FROM busybox
 
-EXPOSE 80
+COPY ./httpd.conf /etc
+COPY --from=build /app/public /srv/www
+
+# Run BusyBox httpd
+CMD ["busybox", "httpd", "-f", "-v", "-p", "8080"]
