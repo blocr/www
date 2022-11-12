@@ -1,6 +1,4 @@
 MD         := pandoc
-CP         := rsync
-CPFLAGS    := -avzq
 BUILDDIR   := public
 TEMPLATES  := templates
 FILTERS    := filters
@@ -24,7 +22,7 @@ $(BUILDDIR)/posts/%.html: posts/%.md $(TEMPLATES)/post.html
 	$(MD) $< --template $(TEMPLATES)/post -V time='$(TIME)' -o $@
 
 $(BUILDDIR)/assets/%: assets/%
-	$(CP) $< $@
+	cp $< $@
 
 $(FEED): index.yml $(TEMPLATES)/feed.xml
 	$(MD) index.yml --template $(TEMPLATES)/feed.xml -V time:'$(shell date -u +'%FT%TZ')' -L $(FILTERS)/rfc3339.lua -o $@
