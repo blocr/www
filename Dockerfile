@@ -1,6 +1,6 @@
 FROM pandoc/core as build
 
-RUN apk --no-cache add build-base rsync
+RUN apk --no-cache add build-base coreutils
 
 WORKDIR /app
 COPY . /app
