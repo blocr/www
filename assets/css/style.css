@@ -65,7 +65,7 @@ pre {
 
 a {
     color: var(--color);
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 a:visited {
@@ -105,7 +105,7 @@ aside header::before {
     margin-bottom: -0.5em;
 }
 
-aside header a::hover {
+aside header a {
     text-decoration: none;
 }
 
@@ -121,18 +121,10 @@ nav ul li {
     line-height: 2em;
 }
 
-nav ul li a {
-    text-decoration: underline;
-}
-
 main {
     width: 100%;
     margin-right: 1rem;
     margin-top: 2rem;
-}
-
-main a:hover {
-    text-decoration: underline;
 }
 
 section ul {
