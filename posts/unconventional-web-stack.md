@@ -9,19 +9,20 @@ A static site generator (SSG) takes raw text data and templates, and through the
 While Hugo, Jekyll, Hexo ... etc are the conventional mainstream options for doing what has been described, in an unfortunately complex and inflexible manner, it is worth noting that some document conversion tools can achieve the same thing with some caveats.
 
 ## Markdown
-[pandoc](https://pandoc.org) is a general purpose document conversion tool. It can be used to generate html or html5 document from a given markdown one.
-
+[pandoc](https://pandoc.org) is a general purpose document conversion tool. It can be used to generate html or html5 documents from a given markdown one. It also has a rich [templating language](https://pandoc.org/MANUAL.html#template-syntax), which allows for great output customizability.
 ```
 $ pandoc document.md -o document.html
 ```
 
-pandoc also has a somewhat rich [templating language](https://pandoc.org/MANUAL.html#template-syntax), which allows for great customizability of web documents.
+Although pandoc is great tool for markdown conversion, it's actually a relatively fat binary. The statically linked pandoc is around **~50 MB** in size.
 
-## GNU Make
+The good news is that it is not a strict requirement on this system. Any markdown to html converter including the reference implementation of [CommonMark](https://github.com/commonmark/cmark) can be used.
+
+## Make
 [make](https://www.gnu.org/software/make/) can be used to automate the process
 ```
 %.html: %.md
-	pandoc $< -o $@
+	$(MD)$ $< -o $@
 ```
 
 ## The caveats
