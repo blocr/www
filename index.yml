@@ -1,3 +1,7 @@
 ---
 posts: 
+  - title: Your unconventional static web stack
+    date: November 12, 2022
+    abstract:
+    path: posts/unconventional-web-stack.html
 ...
